@@ -1,4 +1,4 @@
 /node_modules
-/build
+
 /plugins/index.js
-.npmignore 
+.npmignore

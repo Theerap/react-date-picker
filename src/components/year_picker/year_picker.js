@@ -49,7 +49,7 @@ export default function YearPicker({ state, setState, onChange }) {
                     onClick={() => selectYear(year)}
                 >
                     <span className={state.onlyYearPicker ? "sd" : ""}>
-                        {year.toString().replace(/[0-9]/g, w => digits[w])}
+                        {parseInt(year.toString().replace(/[0-9]/g, w => digits[w]))+543}
                     </span>
                 </div>
                 )}

@@ -5,12 +5,15 @@ import Calendar from "../calendar/calendar"
 import { getAllDatesInRange } from "../../../plugins/all/date_panel/date_panel"
 import { IconCalendarEvent } from '@tabler/icons'
 import "./date_picker.css"
-
+const local_th = {
+  weekDays: ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"],
+  months: ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"]
+}
 function DatePicker(
   {
     value,
     calendar = "gregorian",
-    locale = "en",
+    locale,
     format,
     timePicker,
     onlyTimePicker,
@@ -137,11 +140,14 @@ function DatePicker(
       if (!(date instanceof DateObject)) date = new DateObject({ date, calendar, locale, format })
 
       if (date.calendar !== calendar) date.setCalendar(calendar)
-      if (date.locale !== locale) date.setLocale(locale)
-
-      date.months = months
-      date.weekDays = weekDays
-
+      if (date.locale !== locale && locale  == 'th') date.setLocale(locale)
+      if (locale == 'th') {
+        date.months = local_th.months
+        date.weekDays = local_th.weekDays
+      } else {
+        date.months = months
+        date.weekDays = weekDays
+      }
       date.setFormat(getFormat(timePicker, onlyTimePicker, onlyMonthPicker, onlyYearPicker, format, range, multiple))
 
       return date
@@ -356,8 +362,8 @@ function DatePicker(
         onlyMonthPicker={onlyMonthPicker}
         onlyYearPicker={onlyYearPicker}
         className={className + (isMobileMode() ? " rmdp-mobile" : "")}
-        weekDays={weekDays}
-        months={months}
+        weekDays={locale == 'th' ? local_th.weekDays : weekDays}
+        months={locale == 'th' ? local_th.months : months}
         minDate={minDate}
         maxDate={maxDate}
         formattingIgnoreList={JSON.parse(formattingIgnoreList)}
@@ -419,7 +425,8 @@ function DatePicker(
       [DateObject.locales.EN]: { OK: "OK", CANCEL: "CANCEL" },
       [DateObject.locales.FA]: { OK: "تأیید", CANCEL: "لغو" },
       [DateObject.locales.AR]: { OK: "تأكيد", CANCEL: "الغاء" },
-      [DateObject.locales.HI]: { OK: "पुष्टि", CANCEL: "रद्द करें" }
+      [DateObject.locales.HI]: { OK: "पुष्टि", CANCEL: "रद्द करें" },
+      "th": { OK: "ตกลง", CANCEL: "ยกเลิก" }
     }
 
     if (typeof locale === "string" && actions[locale.toUpperCase()]) return actions[locale.toUpperCase()][string]
@@ -495,8 +502,14 @@ function DatePicker(
   }
 
   function setCustomNames(date) {
-    date.months = months
-    date.weekDays = weekDays
+    if (locale == 'th') {
+      date.months = local_th.months
+      date.weekDays = local_th.weekDays
+    } else {
+      date.months = months
+      date.weekDays = weekDays
+    }
+    return date
   }
 
   function handleValueChange(e) {

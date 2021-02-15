@@ -2,7 +2,7 @@ import React from "react"
 import Arrow from "../arrow/arrow"
 import DateObject from "react-date-object"
 
-export default function Header({ state, setState, onChange, disableYearPicker, disableMonthPicker, customMonths }) {
+export default function Header({ state, setState, onChange, disableYearPicker, disableMonthPicker, customMonths, locale }) {
     let monthName = undefined
 
     if (Array.isArray(customMonths) && customMonths.length >= 12) {
@@ -23,14 +23,14 @@ export default function Header({ state, setState, onChange, disableYearPicker, d
                             style={{ cursor: disableMonthPicker || state.onlyMonthPicker ? "default" : "pointer" }}
                             onClick={() => !disableMonthPicker && toggle("mustShowMonthPicker")}
                         >
-                            {monthName},
+                            {monthName}{(locale != 'th') && (',')}
                         </span>
                     }
                     <span
                         style={{ cursor: disableYearPicker || state.onlyYearPicker ? "default" : "pointer" }}
                         onClick={() => !disableYearPicker && toggle("mustShowYearPicker")}
                     >
-                        {parseInt(state.date.format("YYYY").toString()) + 543}
+                        {(locale === 'th') ? parseInt(state.date.format("YYYY").toString()) + 543 : state.date.format("YYYY").toString()}
                     </span>
                 </div>
                 <Arrow direction="rmdp-right" onClick={() => increaseValue(1)} />

@@ -223,6 +223,7 @@ function Calendar({
                     className={`rmdp-calendar ${["fa", "ar"].includes(state.date?.locale) ? "rmdp-rtl" : ""} ${getBorderClassName(["left", "right"])}`}
                 >
                     <Header
+                        locale={locale}
                         state={state}
                         setState={setState}
                         onChange={handleChange}
@@ -249,6 +250,7 @@ function Calendar({
                             customMonths={months}
                         />
                         <YearPicker
+                            locale={locale}
                             state={state}
                             setState={setState}
                             onChange={handleChange}

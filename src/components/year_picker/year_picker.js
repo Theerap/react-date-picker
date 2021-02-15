@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import DateObject from "react-date-object"
 
-export default function YearPicker({ state, setState, onChange }) {
+export default function YearPicker({ state, setState, onChange, locale }) {
     const [years, setyears] = useState([]),
         yearRef = useRef(null),
         digits = state.date.digits,
@@ -49,7 +49,7 @@ export default function YearPicker({ state, setState, onChange }) {
                     onClick={() => selectYear(year)}
                 >
                     <span className={state.onlyYearPicker ? "sd" : ""}>
-                        {parseInt(year.toString().replace(/[0-9]/g, w => digits[w]))+543}
+                        {(locale === 'th') ? parseInt(year.toString().replace(/[0-9]/g, w => digits[w]))+543 : year.toString().replace(/[0-9]/g, w => digits[w])}
                     </span>
                 </div>
                 )}

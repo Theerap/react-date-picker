@@ -10,7 +10,7 @@ import "./calendar.css"
 function Calendar({
     value,
     calendar = "gregorian",
-    locale = "en",
+    locale = "th",
     format,
     timePicker,
     onlyTimePicker,

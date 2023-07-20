@@ -33,6 +33,7 @@ function DatePicker(
         onlyMonthPicker,
         onlyYearPicker,
         onChange,
+        onChangeInput,
         range = false,
         multiple = false,
         name,
@@ -478,6 +479,7 @@ function DatePicker(
 
         ref.current = { ...ref.current, date };
 
+        if (onChangeInput instanceof Function) onChangeInput(e);
         if (onChange instanceof Function) onChange(date, e);
 
         if (date) {
@@ -519,7 +521,7 @@ function DatePicker(
         if (!value) {
             setStringDate("");
 
-            return handleChange(new DateObject({}));
+            return handleChange(new DateObject({}), false, e);
         }
 
         if (!digits) return;

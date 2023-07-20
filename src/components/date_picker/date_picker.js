@@ -397,9 +397,9 @@ function DatePicker(
                         <button
                             type="button"
                             className="rmdp-button rmdp-action-button"
-                            onClick={() => {
+                            onClick={(e) => {
                                 if (ref.current.temporaryDate) {
-                                    handleChange(ref.current.temporaryDate, true);
+                                    handleChange(ref.current.temporaryDate, true, e);
                                     delete ref.current.temporaryDate;
                                 }
 

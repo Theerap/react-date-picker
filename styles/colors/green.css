@@ -2,9 +2,9 @@
     --rmdp-primary-green: #3d9970;
     --rmdp-secondary-green: #87ad92;
     --rmdp-shadow-green: #87ad92;
-    --rmdp-today-green: #01ff70;
-    --rmdp-hover-green: #2ecc40;
-    --rmdp-deselect-green: #39795c;
+    --rmdp-today-green: #00c154;
+    --rmdp-hover-green: #63db71;
+    --rmdp-deselect-green: #01a45b;
 }
 
 .green .rmdp-wrapper {
@@ -59,6 +59,7 @@
 }
 
 .green .rmdp-day:not(.rmdp-day-hidden) span:hover {
+    color: #111;
     background-color: var(--rmdp-hover-green) !important;
 }
 
